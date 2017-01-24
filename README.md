@@ -12,7 +12,7 @@ Issuing the following command at the root of the project will bring the default 
 $ polymer serve --open
 ```
 
-In order to see a demo of the component, navigate to http://localhost:8080/demo. You can edit the component declaration by editing it inside the tags `<template>...</template>` in the `[project root]/demo/index.html` file.
+In order to see a demo of the component, navigate to [http://localhost:8080/demo](http://localhost:8080/demo). You can edit the component declaration by editing it inside the tags `<template>...</template>` in the `[project root]/demo/index.html` file.
 
 ## Building Your Application
 
