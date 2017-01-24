@@ -1,0 +1,76 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="gvisoc-timer">
+    <template>
+        <!-- local DOM for your element -->
+        <p>{{value}}</p>
+    </template>
+    <script>
+        Polymer({
+            is: "gvisoc-timer",
+            properties: {
+                // Initial value for the timer to start from.
+                initial: {
+                    type: Number,
+                    value: 0
+                },
+                // Value to reach.
+                goal: {
+                    type: Number,
+                    value: 100
+                },
+                // Number of milliseconds between each value change.
+                tick : {
+                    type: Number,
+                    value: 1000
+                },
+                // Direction of the counter. If <samp>growing</samp> is not present, then the timer goes towards lower values, otherwise if present. <span style="color:red">Defaults to false in oder to be validable</span> through observers.
+                growing: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            observers : [
+                '_validateDeclaredProps(initial, goal, growing, tick)'
+            ],
+            /*This function validates the properties of the timer to prevent overflows. In detail:
+                <ul>
+                    <li><samp>goal</samp> and <samp>initial</samp> have to be different to prevent wasting browser resources</li>
+                    <li><samp>growing</samp>, <samp>goal</samp> and <samp>initial</samp> have to be coherent: </li>
+                    <ul>
+                        <li>if <samp>growing</samp>, then <samp>goal</samp> has to be greater than <samp>initial</samp></li>
+                        <li>if <samp>!growing</samp> then vice versa.</li>
+                    </ul>
+                </ul>
+            */
+            _validateDeclaredProps: function (initial, goal, growing, tick) {
+                // TODO: test this function.
+                var valid = true;
+                if (tick <= 0) valid = false;
+                if (growing && initial >= goal) valid = false;
+                if (!growing && initial <= goal) valid = false;
+                if(!valid) {
+                    console.log("(gvisoc-timer) Validating: ",initial, goal, growing, tick, "; RESULT: ",valid);
+                    throw "Misconfigurated (gvisoc-timer)"; // TODO: ellaborate errors - give fine grain JSON obj.
+                }
+            },
+            // Timer implementation. Uses Polymer's <samp>this.async()</samp>.
+            _counter: function () {
+                // TODO: test this function.
+                if(this.growing)
+                    this.value++;
+                else
+                    this.value--;
+                if(this.value != this.goal){
+                    this.async(this._counter, this.tick);
+                }
+                else{
+                    this.fire("end", {initial: this.initial, goal: this.goal, value: this.value});
+                }
+            },
+            ready: function () {
+                this.value = this.initial;
+                this._counter();
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+        <title>gvisoc-timer demo</title>
+
+        <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+        <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+        <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../gvisoc-timer.html">
+
+        <style is="custom-style" include="demo-pages-shared-styles">
+        </style>
+    </head>
+    <body>
+        <div class="vertical-section-container centered">
+            <h3>Basic gvisoc-timer demo</h3>
+            <p>This component is a configurable timer. In addition to the documentation available in <a href="../components/gvisoc-timer/">the component's page</a>, it is noticeable that it fires an event of type <samp>"end"</samp> whenever the timer reaches its <samp>goal</samp>. Inside the event is a JSON object holding the initial configuration and the final value, for information purposes.</p>
+            <demo-snippet>
+                <template>
+                    <gvisoc-timer
+                        initial="0"
+                        goal="-1000"
+                        tick="10">
+                    </gvisoc-timer>
+                </template>
+            </demo-snippet>
+        </div>
+    </body>
+</html>
