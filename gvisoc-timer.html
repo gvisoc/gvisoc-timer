@@ -50,7 +50,7 @@
                 if (!growing && initial <= goal) valid = false;
                 if(!valid) {
                     console.log("(gvisoc-timer) Validating: ",initial, goal, growing, tick, "; RESULT: ",valid);
-                    throw "Misconfigurated (gvisoc-timer)"; // TODO: ellaborate errors - give fine grain JSON obj.
+                    throw new Error("Misconfigurated (gvisoc-timer)"); // TODO: ellaborate errors - give fine grain JSON obj.
                 }
             },
             // Timer implementation. Uses Polymer's <samp>this.async()</samp>.
