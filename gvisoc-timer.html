@@ -43,15 +43,14 @@
                 </ul>
             */
             _validateDeclaredProps: function (initial, goal, growing, tick) {
-                // TODO: test this function.
                 var valid = true;
                 if (tick <= 0) valid = false;
                 if (growing && initial >= goal) valid = false;
                 if (!growing && initial <= goal) valid = false;
                 if(!valid) {
                     console.log("(gvisoc-timer) Validating: ",initial, goal, growing, tick, "; RESULT: ",valid);
-                    // throw new Error("Misconfigurated (gvisoc-timer)"); // TODO: ellaborate errors - give fine grain
-                    // JSON obj.
+                    // Failing silently is golden (WebComponents best practices --see
+                    // https://www.webcomponents.org/community/articles/web-components-best-practices)
                     this.valid = false;
                 }
             },
