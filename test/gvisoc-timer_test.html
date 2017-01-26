@@ -59,6 +59,11 @@
                 <gvisoc-timer initial="-5" goal="15" tick="0" growing></gvisoc-timer>
             </template>
         </test-fixture>
+        <test-fixture id="valid-counter-counting">
+            <template>
+                <gvisoc-timer initial="-5" goal="15" tick="1" growing></gvisoc-timer>
+            </template>
+        </test-fixture>
         <script>
         suite('gvisoc-timer', function() {
             test('instantiating a basic valid element should make it valid', function() {
@@ -105,6 +110,14 @@
                 var element = fixture('non-valid-tick');
                 assert.equal(element.is, 'gvisoc-timer');
                 assert.equal(element.valid, false);
+            });
+            test('a component that is valid actually works', function () {
+                this.timeout(100); // Timer should take less than 30 ms - just in case Selenium borrows too much CPU.
+                var element = fixture('valid-counter-counting');
+                element.addEventListener('end', function(event){
+                    assert.equal(event.type, 'end');
+                    done();
+                });
             });
         });
         </script>
