@@ -38,6 +38,5 @@ $ polymer serve build/bundled
 ```
 $ polymer test
 ```
-**Note**: the archetype that is used at this time to generate this project ("basic", aka `polymer init`) provides several broken links that cause the test suite to properly work. This is currently being fixed (by me, for this project).
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
