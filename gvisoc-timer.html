@@ -80,7 +80,7 @@
             },
             ready: function () {
                 this.value = this.initial;
-                this._counter();
+                this.async(this._counter, this.tick);
             }
         });
     </script>
