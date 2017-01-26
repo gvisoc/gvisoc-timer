@@ -29,6 +29,7 @@
                     type: Boolean,
                     value: false
                 },
+                // This property tells if the component is valid (the timer actually works) or not. It won't be valid if the properties are incoherent, as computed with the function <samp>_validateDeclaredProps(initial, goal, growing, tick)</samp>
                 valid : {
                     type: Boolean,
                     computed: '_validateDeclaredProps(initial, goal, growing, tick)'
@@ -46,6 +47,7 @@
                         <li>if <samp>!growing</samp> then vice versa.</li>
                     </ul>
                 </ul>
+                <p>In previous versions of this component, this was a multi-property observer, but it failed to update the <samp>valid</samp> property because the reasons that make this is strongly discouraged and flagged as an anti-pattern (see https://www.polymer-project.org/1.0/docs/devguide/observers#multi-property-observers), so it had to be used int he context of Computed Properties. The point of decorating the Component with a computed property that flags it as invalid is to prevent the timer to work if the arguments are incoherent.</p>
             */
             _validateDeclaredProps: function (initial, goal, growing, tick) {
                 var valid = true;
