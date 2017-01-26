@@ -4,6 +4,7 @@
         <!-- local DOM for your element -->
         <p>{{value}}</p>
     </template>
+    <!-- script src="gvisoc-timer.js"></script -->
     <script>
         Polymer({
             is: "gvisoc-timer",
@@ -27,11 +28,15 @@
                 growing: {
                     type: Boolean,
                     value: false
+                },
+                valid : {
+                    type: Boolean,
+                    computed: '_validateDeclaredProps(initial, goal, growing, tick)'
                 }
             },
-            observers : [
-                '_validateDeclaredProps(initial, goal, growing, tick)'
-            ],
+            //observers : [
+            //    '_validateDeclaredProps(initial, goal, growing, tick)'
+            //],
             /*This function validates the properties of the timer to prevent overflows. In detail:
                 <ul>
                     <li><samp>goal</samp> and <samp>initial</samp> have to be different to prevent wasting browser resources</li>
@@ -51,8 +56,9 @@
                     console.log("(gvisoc-timer) Validating: ",initial, goal, growing, tick, "; RESULT: ",valid);
                     // Failing silently is golden (WebComponents best practices --see
                     // https://www.webcomponents.org/community/articles/web-components-best-practices)
-                    this.valid = false;
+
                 }
+                return valid;
             },
             // Timer implementation. Uses Polymer's <samp>this.async()</samp>.
             _counter: function () {

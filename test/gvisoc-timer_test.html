@@ -24,90 +24,88 @@
                 <gvisoc-timer initial="0" goal="5" tick="100" growing></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="event">
-            <template>
-                <div id="event-catcher"></div>
-            </template>
-        </test-fixture>
-        <test-fixture id="valid-not-growing">
+        <test-fixture id="valid-non-growing">
             <template>
                 <gvisoc-timer initial="0" goal="-5" tick="1"></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="not-valid-initial-gt-goal-growing">
+        <test-fixture id="non-valid-basic">
+            <template>
+                <gvisoc-timer></gvisoc-timer>
+            </template>
+        </test-fixture>
+        <test-fixture id="non-valid-initial-gt-goal-growing">
             <template>
                 <gvisoc-timer initial="0" goal="-5" tick="1" growing></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="not-valid-initial-lt-goal-not-growing">
+        <test-fixture id="non-valid-initial-lt-goal-non-growing">
             <template>
                 <gvisoc-timer initial="0" goal="5" tick="1"></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="not-valid-initial-eq-goal-not-growing">
+        <test-fixture id="non-valid-initial-eq-goal-non-growing">
             <template>
                 <gvisoc-timer initial="-5" goal="-5" tick="1000"></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="not-valid-initial-eq-goal-growing">
+        <test-fixture id="non-valid-initial-eq-goal-growing">
             <template>
                 <gvisoc-timer initial="-5" goal="-5" tick="1000" growing></gvisoc-timer>
             </template>
         </test-fixture>
-        <test-fixture id="not-valid-tick">
+        <test-fixture id="non-valid-tick">
             <template>
-                <gvisoc-timer initial="-5" goal="-5" tick="1000" growing></gvisoc-timer>
+                <gvisoc-timer initial="-5" goal="15" tick="0" growing></gvisoc-timer>
             </template>
         </test-fixture>
         <script>
         suite('gvisoc-timer', function() {
-            test('instantiating a valid element works', function() {
+            test('instantiating a basic valid element should make it valid', function() {
                 var element = fixture('basic');
                 assert.equal(element.is, 'gvisoc-timer');
-                element = fixture('valid-growing');
-                assert.equal(element.is, 'gvisoc-timer');
-                element = fixture('valid-not-growing');
-                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, true);
             });
-            // This does not work on any browser
-            test('instantiating a non-valid element does not work 1', function() {
-                try {
-                    document.createElement('gvisoc-timer').setAttribute("growing","true").setAttribute("initial","0").se
-                    tAttribute("goal","-5").setAttribute("tick","1");
-                    fail();
-                } catch (e) {
-                    done();
-                }
-            });
-            // This does not work on Chrome
-            test('instantiating a non-valid element does not work 2', function() {
-                expect(()=>{
-                    document.createElement('gvisoc-timer').setAttribute("growing","true").setAttribute("initial","0").se
-                    tAttribute("goal","-5").setAttribute("tick","1");
-                }).to.throw(Error);
-            });
-            // These tests pass in Firefox and Safari, but not in Chrome. Move on for now.
-            // TODO: Fix these tests for multi-browser
-            test('instantiating a non-valid element does not work 3', function() {
-                assert.throws(()=>fixture('not-valid-initial-gt-goal-growing'),
-                    /^.*Misconfigurated \(gvisoc-timer\).*$/);
-                assert.throws(()=>fixture('not-valid-initial-lt-goal-not-growing'),
-                    /^.*Misconfigurated \(gvisoc-timer\).*$/);
-                assert.throws(()=>fixture('not-valid-initial-eq-goal-not-growing'),
-                    /^.*Misconfigurated \(gvisoc-timer\).*$/);
-                assert.throws(()=>fixture('not-valid-initial-eq-goal-growing'),
-                    /^.*Misconfigurated \(gvisoc-timer\).*$/);
-                assert.throws(()=>fixture('not-valid-tick'),
-                    /^.*Misconfigurated \(gvisoc-timer\).*$/);
-            });
-
-            /*test('should emit an some_event', function(done){
-                this.timeout(10000); //timeout with an error if done() isn't called within one second
-
-                var eDiv = fixture('event');
-                eDiv.addEventListener('end', (e) => {console.log(e);done()});
+            test('instantiating a basic valid growing element should make it valid', function() {
                 var element = fixture('valid-growing');
-            });*/
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, true);
+            });
+            test('instantiating a valid non-growing element should make it valid', function() {
+                var element = fixture('valid-non-growing');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, true);
+            });
+            test('instantiating a non-valid basic element should make it invalid', function() {
+                var element = fixture('non-valid-basic');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
+            test('instantiating a {initial > goal && growing} element should make it invalid', function() {
+                var element = fixture('non-valid-initial-gt-goal-growing');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
+            test('instantiating a {initial < goal && !growing} element should make it invalid', function() {
+                var element = fixture('non-valid-initial-lt-goal-non-growing');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
+            test('instantiating a {initial == goal && !growing} element should make it invalid', function() {
+                var element = fixture('non-valid-initial-eq-goal-non-growing');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
+            test('instantiating a {initial == goal && !growing} element should make it invalid', function() {
+                var element = fixture('non-valid-initial-gt-goal-growing');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
+            test('instantiating a {tick <= 0} element should make it invalid', function() {
+                var element = fixture('non-valid-tick');
+                assert.equal(element.is, 'gvisoc-timer');
+                assert.equal(element.valid, false);
+            });
         });
         </script>
     </body>
