@@ -125,8 +125,8 @@
                 assert.isBelow(element.value, element.initial);
                 clock.restore();
             });
-            test('a component that is valid actually sends an event on a completed execution', function () {
-                this.timeout(100); // Timer should take less than 30 ms - just in case Selenium borrows too much CPU.
+            test('a component that is valid actually sends an event on a completed execution', function (done) {
+                this.timeout(2000); // Timer should take less than 30 ms - just in case Selenium borrows too much CPU.
                 var element = fixture('valid-counter-counting');
                 element.addEventListener('end', function(event){
                     assert.equal(event.type, 'end');
