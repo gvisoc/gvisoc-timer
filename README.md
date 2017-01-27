@@ -39,4 +39,4 @@ $ polymer serve build/bundled
 $ polymer test
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally. These tests use Selenium. Also, it is integrated with Travis CI and Saucelabs for automated build and testing. 
+Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally. These tests use Selenium. Also, it is integrated with Travis CI and Saucelabs for automated build (CI) and testing. 
