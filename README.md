@@ -1,4 +1,4 @@
-# \<gvisoc-timer\> [![Build Status](https://travis-ci.org/coma/gvisoc-timer.svg?branch=master)](https://travis-ci.org/coma/gvisoc-timer)
+# \<gvisoc-timer\> [![Build Status](https://travis-ci.org/gvisoc/gvisoc-timer.svg?branch=master)](https://travis-ci.org/gvisoc/gvisoc-timer.svg?branch=master)
 
 A basic parameterizable timer that only works when its attributes are coherent (avoiding overflows). It is strongly recommended to read component's documentation by browsing [http://localhost:8080/components/gvisoc-timer/](http://localhost:8080/components/gvisoc-timer) after running `polymer serve`, because it has all the detail on some caveats found during the development of this component and how I avoided them. It also has links to the corresponding document where you can find the rationale behind those caveats.
 
@@ -34,9 +34,8 @@ $ polymer serve build/bundled
 ```
 
 ## Running Tests
-
+The tests are automated whenever you push changes to Github by Travis CI and Saucelabs. For running your tests locally you must bypass the Saucelabs plugin, aka `sauce`, hence the command you want to use in your workstation is:
 ```
-$ polymer test
+$ polymer-test --skip-plugin sauce
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally. These tests use Selenium. Also, it is integrated with Travis CI and Saucelabs for automated build (CI) and testing. 
