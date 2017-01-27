@@ -66,6 +66,12 @@
         </test-fixture>
         <script>
         suite('gvisoc-timer', function() {
+            suiteSetup(function(){
+                this.clock = sinon.useFakeTimers();
+            });
+            suiteTeardown(function(){
+                this.clock.restore();
+            });
             test('instantiating a basic valid element should make it valid', function() {
                 var element = fixture('basic');
                 assert.equal(element.is, 'gvisoc-timer');
@@ -112,26 +118,22 @@
                 assert.equal(element.valid, false);
             });
             test('for a valid element, value should vary over time according growing timer', function () {
-                var clock = sinon.useFakeTimers();
                 var element = fixture('valid-growing'); // 5 ms timer
-                clock.tick(1);
+                this.clock.tick(1);
                 assert.isAbove(element.value, element.initial);
-                clock.restore();
             });
             test('for a valid, element value should vary over time according non-growing timer', function () {
-                var clock = sinon.useFakeTimers();
                 var element = fixture('valid-non-growing'); // 5 ms timer
-                clock.tick(1);
+                this.clock.tick(1);
                 assert.isBelow(element.value, element.initial);
-                clock.restore();
             });
             test('a component that is valid actually sends an event on a completed execution', function (done) {
-                this.timeout(2000); // Timer should take less than 30 ms - just in case Selenium borrows too much CPU.
                 var element = fixture('valid-counter-counting');
                 element.addEventListener('end', function(event){
                     assert.equal(event.type, 'end');
                     done();
                 });
+                this.clock.tick(20);
             });
         });
         </script>
