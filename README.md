@@ -34,9 +34,8 @@ $ polymer serve build/bundled
 ```
 
 ## Running Tests
-
+The tests are automated whenever you push changes to Github by Travis CI and Saucelabs. For running your tests locally you must bypass the Saucelabs plugin, aka `sauce`, hence the command you want to use in your workstation is:
 ```
-$ polymer test
+$ polymer-test --skip-plugin sauce
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally. These tests use Selenium. Also, it is integrated with Travis CI and Saucelabs for automated build (CI) and testing. 
