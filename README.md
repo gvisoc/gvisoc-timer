@@ -1,5 +1,7 @@
 # \<gvisoc-timer\> [![Build Status](https://travis-ci.org/gvisoc/gvisoc-timer.svg?branch=master)](https://travis-ci.org/gvisoc/gvisoc-timer.svg?branch=master)
 
+boom
+
 A basic parameterizable timer that only works when its attributes are coherent (avoiding overflows). It is strongly recommended to read component's documentation by browsing [http://localhost:8080/components/gvisoc-timer/](http://localhost:8080/components/gvisoc-timer) after running `polymer serve`, because it has all the detail on some caveats found during the development of this component and how I avoided them. It also has links to the corresponding document where you can find the rationale behind those caveats.
 
 ## Install the Polymer-CLI
